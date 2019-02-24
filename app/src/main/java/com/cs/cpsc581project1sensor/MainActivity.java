@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -32,13 +33,14 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText editText;
-    ImageView ivDoor;
+    //EditText editText;
+    Toast toasty;
+    ImageButton ibDoor;
 
     SpeechRecognizer mSpeechRecognizer;
     Intent mSpeechRecognizerIntent;
 
-    int doorSelected = 1;               //Door to use as image  0 = no door,    1 = tardis
+    int doorSelected = 0;               //Door to use as image  0 = no door,    1 = tardis
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +50,9 @@ public class MainActivity extends AppCompatActivity {
         checkPermission();
         linkScreenElements();
         createListeners();
+        Log.d("zzz", "listenign for speech");
         createSpeechRecognizer();
-
-        new startClapper().execute();
-
+        Log.d("zzz", "end speech");
     }
 
     private class startClapper extends AsyncTask<Void, Void, Boolean> {
@@ -73,29 +74,39 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Boolean clapDetected) {
             if (clapDetected && doorSelected == 1){
                 Log.d("zzz", "Clap!!!!!!!!!!!!!!!");
-                ivDoor.setImageResource(R.drawable.home_screen_1);
+                ibDoor.setImageResource(R.drawable.tardisafter);
             }
-
-            else{
-                new startClapper().execute();
+            if (clapDetected && doorSelected == 2){
+                Log.d("zzz", "Clap!!!!!!!!!!!!!!!");
+                ibDoor.setImageResource(R.drawable.blondeafter);
+            }
+            if (clapDetected && doorSelected == 3){
+                Log.d("zzz", "Clap!!!!!!!!!!!!!!!");
+                ibDoor.setImageResource(R.drawable.krispiesafter);
+            }
+            if (clapDetected && doorSelected == 4){
+                Log.d("zzz", "Clap!!!!!!!!!!!!!!!");
+                ibDoor.setImageResource(R.drawable.thanosafter);
             }
         }
     }
 
     private void createListeners(){
-        findViewById(R.id.button).setOnTouchListener(new View.OnTouchListener() {
+        findViewById(R.id.ibDoor).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
 
                 switch (motionEvent.getAction()){
                     case MotionEvent.ACTION_UP:
                         mSpeechRecognizer.stopListening();
-                        editText.setHint("You will see the input here...");
                         break;
 
                     case MotionEvent.ACTION_DOWN:
-                        editText.setText("");
-                        editText.setHint("Listening...");
+                        toasty = Toast.makeText(getApplicationContext(),
+                                "Listening...",
+                                Toast.LENGTH_SHORT);
+
+                        toasty.show();
                         mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
                         break;
 
@@ -106,9 +117,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void linkScreenElements(){
-        editText = findViewById(R.id.editText);
-        ivDoor = findViewById(R.id.ivDoor);
+   private void linkScreenElements(){
+        //editText = findViewById(R.id.editText);
+        ibDoor = findViewById(R.id.ibDoor);
     }
 
 
@@ -157,11 +168,37 @@ public class MainActivity extends AppCompatActivity {
 
                 if(matches != null) {
                     String speech = matches.get(0);
-                    editText.setText(speech);
 
-                    if(speech.equals("test") || speech.equals("alonzi")){
+                    if(speech.equals("1") || speech.equals("alonzi")){
                         doorSelected = 1;
-                        ivDoor.setImageResource(R.drawable.tardisclosed);
+                        Log.d("zzz", "door selected");
+                        ibDoor.setImageResource(R.drawable.tardis);
+                        Log.d("zzz", "image set");
+                        //new startClapper().execute();
+                    } else if(speech.equals("2") || speech.equals("elle")){
+                        doorSelected = 2;
+                        Log.d("zzz", "door selected");
+                        ibDoor.setImageResource(R.drawable.blonde);
+                        Log.d("zzz", "image set");
+                        //new startClapper().execute();
+                    } else if(speech.equals("3") || speech.equals("crackle")){
+                        doorSelected = 3;
+                        Log.d("zzz", "door selected");
+                        ibDoor.setImageResource(R.drawable.krispies);
+                        Log.d("zzz", "image set");
+                        //new startClapper().execute();
+                    } else if(speech.equals("4") || speech.equals("stark")){
+                        doorSelected = 4;
+                        Log.d("zzz", "door selected");
+                        ibDoor.setImageResource(R.drawable.thanos);
+                        Log.d("zzz", "image set");
+                        //new startClapper().execute();
+                    } else {
+                        Toast toast = Toast.makeText(getApplicationContext(),
+                                "Word is invalid, please try again!",
+                                Toast.LENGTH_SHORT);
+
+                        toast.show();
                     }
                 }
             }
@@ -225,12 +262,12 @@ public class MainActivity extends AppCompatActivity {
          * trigger it
          */
         public static final int AMPLITUDE_DIFF_LOW = 10000;
-        public static final int AMPLITUDE_DIFF_MED = 18000;
+        public static final int AMPLITUDE_DIFF_MED = 30000;
         /**
          * requires a lot of noise by the user to trigger. background noise isn't
          * likely to be this loud
          */
-        public static final int AMPLITUDE_DIFF_HIGH = 25000;
+        public static final int AMPLITUDE_DIFF_HIGH = 30000;
 
         private static final int DEFAULT_AMPLITUDE_DIFF = AMPLITUDE_DIFF_MED;
 
