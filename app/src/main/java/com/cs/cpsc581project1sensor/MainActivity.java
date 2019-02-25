@@ -33,7 +33,6 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    //EditText editText;
     Toast toasty;
     ImageButton ibDoor;
 
@@ -45,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getSupportActionBar().hide(); //hide the title bar
         setContentView(R.layout.activity_main);
 
         checkPermission();
@@ -174,25 +175,25 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("zzz", "door selected");
                         ibDoor.setImageResource(R.drawable.tardis);
                         Log.d("zzz", "image set");
-                        //new startClapper().execute();
+                        new startClapper().execute();
                     } else if(speech.equals("2") || speech.equals("elle")){
                         doorSelected = 2;
                         Log.d("zzz", "door selected");
                         ibDoor.setImageResource(R.drawable.blonde);
                         Log.d("zzz", "image set");
-                        //new startClapper().execute();
+                        new startClapper().execute();
                     } else if(speech.equals("3") || speech.equals("crackle")){
                         doorSelected = 3;
                         Log.d("zzz", "door selected");
                         ibDoor.setImageResource(R.drawable.krispies);
                         Log.d("zzz", "image set");
-                        //new startClapper().execute();
+                        new startClapper().execute();
                     } else if(speech.equals("4") || speech.equals("stark")){
                         doorSelected = 4;
                         Log.d("zzz", "door selected");
                         ibDoor.setImageResource(R.drawable.thanos);
                         Log.d("zzz", "image set");
-                        //new startClapper().execute();
+                        new startClapper().execute();
                     } else {
                         Toast toast = Toast.makeText(getApplicationContext(),
                                 "Word is invalid, please try again!",
