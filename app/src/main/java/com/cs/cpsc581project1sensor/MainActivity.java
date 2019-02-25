@@ -300,7 +300,7 @@ public class MainActivity extends AppCompatActivity {
          * trigger it
          */
         public static final int AMPLITUDE_DIFF_LOW = 10000;
-        public static final int AMPLITUDE_DIFF_MED = 30000;
+        public static final int AMPLITUDE_DIFF_MED = 20000;
         /**
          * requires a lot of noise by the user to trigger. background noise isn't
          * likely to be this loud
