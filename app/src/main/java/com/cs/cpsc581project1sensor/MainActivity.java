@@ -89,6 +89,16 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("zzz", "Clap!!!!!!!!!!!!!!!");
                 ibDoor.setImageResource(R.drawable.thanosafter);
             }
+
+            try{
+                MainActivity.this.wait(500);
+                ibDoor.setImageResource(R.drawable.home_screen_1);
+            }
+            catch(InterruptedException e)
+            {
+                Log.d("zzz", "Interuppeted");
+            }
+
         }
     }
 
@@ -169,26 +179,27 @@ public class MainActivity extends AppCompatActivity {
 
                 if(matches != null) {
                     String speech = matches.get(0);
+                    Log.d("zzz", "You said: " + speech);
 
-                    if(speech.equals("1") || speech.equals("alonzi")){
+                    if(speech.equals("1") || speech.equals("Alonzi")){
                         doorSelected = 1;
                         Log.d("zzz", "door selected");
                         ibDoor.setImageResource(R.drawable.tardis);
                         Log.d("zzz", "image set");
                         new startClapper().execute();
-                    } else if(speech.equals("2") || speech.equals("elle")){
+                    } else if(speech.equals("2") || speech.equals("Elle")){
                         doorSelected = 2;
                         Log.d("zzz", "door selected");
                         ibDoor.setImageResource(R.drawable.blonde);
                         Log.d("zzz", "image set");
                         new startClapper().execute();
-                    } else if(speech.equals("3") || speech.equals("crackle")){
+                    } else if(speech.equals("3") || speech.equals("Crackle")){
                         doorSelected = 3;
                         Log.d("zzz", "door selected");
                         ibDoor.setImageResource(R.drawable.krispies);
                         Log.d("zzz", "image set");
                         new startClapper().execute();
-                    } else if(speech.equals("4") || speech.equals("stark")){
+                    } else if(speech.equals("4") || speech.equals("Stark")){
                         doorSelected = 4;
                         Log.d("zzz", "door selected");
                         ibDoor.setImageResource(R.drawable.thanos);
