@@ -76,22 +76,22 @@ public class MainActivity extends AppCompatActivity {
             if (clapDetected && doorSelected == 1){
                 Log.d("zzz", "Clap!!!!!!!!!!!!!!!");
                 ibDoor.setImageResource(R.drawable.tardisafter);
-                new unlockPhone().execute();
+                unlockPhone();
             }
             if (clapDetected && doorSelected == 2){
                 Log.d("zzz", "Clap!!!!!!!!!!!!!!!");
                 ibDoor.setImageResource(R.drawable.blondeafter);
-                new unlockPhone().execute();
+                unlockPhone();
             }
             if (clapDetected && doorSelected == 3){
                 Log.d("zzz", "Clap!!!!!!!!!!!!!!!");
                 ibDoor.setImageResource(R.drawable.krispiesafter);
-                new unlockPhone().execute();
+                unlockPhone();
             }
             if (clapDetected && doorSelected == 4){
                 Log.d("zzz", "Clap!!!!!!!!!!!!!!!");
                 ibDoor.setImageResource(R.drawable.thanosafter);
-                new unlockPhone().execute();
+                unlockPhone();
             }
             if (!clapDetected){
                 ibDoor.setImageResource(R.drawable.mist);
@@ -121,9 +121,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void unlockPhone(){
         int i = 0;
-        while (i < 20000){
+        while (i < 5000000){
             i++;
         }
+
+        ibDoor.setImageResource(R.drawable.home_screen_1);
     }
 
     private void createListeners(){
