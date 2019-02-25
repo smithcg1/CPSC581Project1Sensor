@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
                         ibDoor.setImageResource(R.drawable.tardis);
                         Log.d("zzz", "image set");
                         new startClapper().execute();
-                    } else if(speech.equals("2") || speech.equals("Elle")){
+                    } else if(speech.equals("2") || speech.equals("Blond")){
                         doorSelected = 2;
                         Log.d("zzz", "door selected");
                         ibDoor.setImageResource(R.drawable.blonde);
